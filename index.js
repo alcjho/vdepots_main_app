@@ -3,31 +3,12 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import i18n from "i18n-2";
 import session from "express-session";
-import es6Renderer from 'express-es6-template-engine';
+import ejsLayout from 'express-ejs-layouts';
+import ejs from 'ejs';
 import path from 'path';
 
 const app = express();
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
-
-/**
- * configure languages middleware for french and english using cookie
- * 
- */
-i18n.expressBind(app, {
-  locales: ['fr', 'en'],
-  defaultLocale: 'en',
-  cookieName:'mylang',
-  extension: '.json'
-});
-
-/**
-* Initializing Language module (i18n use the cookie set by the client to intitialize the language)
-* without cookie, the default language will prevail.
-*/
-app.use(function(req, res, next){
-  req.i18n.setLocaleFromCookie();
-  next();
-})
 
 
 /**
@@ -56,21 +37,40 @@ app.use(session({
 
 
 /**
+ * configure languages middleware for french and english using cookie
+ * 
+ */
+i18n.expressBind(app, {
+  locales: ['fr', 'en'],
+  defaultLocale: 'en',
+  cookieName:'mylang',
+  extension: '.json'
+});
+
+
+/**
 * External Directory specification for medias
 * 
 */
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine('html', es6Renderer);
-app.set('views', './views');
+app.use(ejsLayout);
 app.set('view engine', 'html');
+app.engine('html', ejs.renderFile);
+app.set('layout', 'layouts/main');  
 
 
-import setRoutes from "./routes/index.js";
-setRoutes(app);
+/**
+* Initializing Language module (i18n use the cookie set by the client to intitialize the language)
+* without cookie, the default language will prevail.
+*/
+app.use(function(req, res, next){
+  req.i18n.setLocaleFromCookie();
+  next();
+})
 
-// app.get('/', function(req, res) {
-//   res.render('home/index', {locals: {title: 'Welcome!'}});
-// });
+
+import home from "./routes/home/index.js";
+home(app);
 
 app.listen(3000);app

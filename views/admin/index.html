@@ -1,0 +1,277 @@
+<style>
+    .dashboard{
+        height:260px;
+        width:auto;
+        background: #008080;
+        background: -moz-linear-gradient(top, #008080 0%, #00CFCF 100%);
+        background: -webkit-linear-gradient(top, #008080 0%, #00CFCF 100%);
+        background: linear-gradient(to bottom, #008080 0%, #00CFCF 100%);
+    }
+
+    .item{
+        margin-left:20px;
+        padding-top:22px;
+        overflow:hidden;
+        height: 200px;
+        border-radius: 5px;
+        cursor:pointer;
+        color:#025050;
+    }
+
+    .item:hover{  
+        color:#d8b763;
+        background-color:#238686;
+    }
+
+    .item i{
+        width:100%;
+        text-align:center;    
+    }
+
+    .item i:hover{
+        color: #d8b763
+    }
+
+    .item h3{
+        width:100%;
+        text-align:center;
+    }
+
+    .symbol{
+        position:relative;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+    }
+
+    .item-container{
+        width:100%;
+        height:400px;
+    }
+
+    .dashboard-header{
+        position:relative;
+        height:200px;
+        width:100%;
+        margin-top:-150px;
+        padding-top:160px;
+        z-index: -1;
+    }
+
+    .dashboard-footer{
+        position:relative;
+        height:80px;
+        width:100%;
+        border-bottom-left-radius:50%;
+        border-bottom-right-radius:50%;
+        -webkit-box-shadow: 5px 5px 7px -1px rgba(0,0,0,0.66); 
+        box-shadow: 5px 5px 7px -1px rgba(0,0,0,0.66); 
+        border-bottom:6px solid #d8b763;      
+    }    
+
+    .whitebg{
+        background-color:#ffffff;
+ 
+    }
+
+     .greybg{
+        background-color:#ddd;
+    }
+
+    .turquoisebg{
+        background-color:#00CFCF;
+    } 
+
+    .middle-dashboard{
+        position:relative;
+        height:300px;
+        width:100%;
+        background:#ddd;    
+    }
+
+
+    .bottom-dashboard{
+        position:relative;
+        height:500px;
+        width:auto;
+        margin-top:-150px;
+        padding-top:160px;
+        background:#ffffff;       
+        z-index:-2; 
+    }
+
+    .title_pane{
+        text-align:center;
+        background-color:#025050;
+        border-bottom-right-radius:20%;
+        border-bottom-left-radius:20%;
+        padding-top: 35px;
+        margin-top: -60px;
+        height:100px;
+        width:250px;
+        color:#ffffff;
+
+    } 
+
+    .dashboard-body{
+        width:100%;
+        overflow:hidden;
+        height:auto;
+
+    }
+
+    .dashboard-content{
+        width:50%;
+    } 
+
+    .dashboard-content img{
+        float:left;
+        cursor:pointer;
+    } 
+
+    .dashboard-content  span{
+        display:block;
+    }
+    
+
+    .dashboard-content i{
+        color:#FF9326;
+        width:100%;
+        text-align:center;
+        cursor:pointer;
+    }
+
+    .dashboard-content table{
+        width:100%;
+    }
+    
+    .dashboard-content p{
+        font-size: 1.4em;
+    }
+
+    .with-btm-margin {
+        margin-bottom:10px;
+    }
+
+
+
+    .item a{
+        color:#0d5252;
+        text-decoration:none;
+    }
+
+    .item a:hover{
+        color:#025050;
+        text-decoration:none;
+    }
+
+
+</style>
+
+<div class="dashboard">
+    <div class="row justify-content-center align-items-center"><div class="col-sm-9"><h2 style="padding:20px;color:#d8b763">X-sells Manager</h2></div></div>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-2 item">
+            <h3><i class="fas fa-info-circle fa-4x"></i></h3>
+            <h3>How to</h3>
+        </div>
+        <div class="col-sm-2 item">
+            <h3><i class="fa fa-envelope-open fa-4x" aria-hidden="true"></i></h3>
+            <h3>Messages</h3>
+        </div>
+        <div class="col-sm-2 item">
+            <h3><i class="fas fa-quote-left fa-4x"></i></h3>
+            <h3>Testimonies</h3>
+        </div>
+       <div class="col-sm-2 item">
+            <h3><i class="fas fa-money-check-alt fa-4x "></i>
+            <h3>Sells</h3>
+        </div>       
+    </div>
+</div>
+<div class="dashboard-footer turquoisebg"></div>
+<div class="dashboard-header greybg">
+    <div class="col-md-9 item-container">
+        <div class="title_pane"><h2>Your catalogs</h2></div>  
+    </div>
+</div>
+<div class="middle-dashboard">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-9 item-container">
+            <div class="dashboard-body">
+                <div class="row">
+                    <div class="col-sm-7 dashboard-content">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <img src="/img/shopping-bags.png" />
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="row with-btm-margin">
+                                    <span class="col-sm-2"><i style="display:inline-block" class="far fa-check-circle fa-2x"></i></span>
+                                    <span class="col-sm-10"><h4 style="display:inline-block">Review and print barcodes for your products </h4></span>
+                                </div>                        
+                                <div class="row with-btm-margin">
+                                    <span class="col-sm-2"><i style="display:inline-block" class="far fa-check-circle fa-2x"></i></span>
+                                    <span class="col-sm-10"><h4 style="display:inline-block">Create your own catalog</h4></span>
+                                </div>
+                                <div class="row with-btm-margin">
+                                    <span class="col-sm-2"><i style="display:inline-block" class="far fa-check-circle fa-2x"></i></span>
+                                    <span class="col-sm-10"><h4 style="display:inline-block">Choose from thousands of existing templates</h4></span>
+                                </div>
+                                <div class="row with-btm-margin">
+                                    <span class="col-sm-2"><i style="display:inline-block" class="far fa-check-circle fa-2x"></i></span>
+                                    <span class="col-sm-10"><h4 style="display:inline-block">Setting up your point-of-sale</h4></span>
+                                </div>
+                                <div class="row with-btm-margin" >
+                                    <span class="col-sm-2"><i style="display:inline-block" class="far fa-check-circle fa-2x"></i></span>
+                                    <span class="col-sm-10"><h4 style="display:inline-block">Share your catalogs with anyone </h4></span>
+                                </div>                                                                        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 dashboard-content">
+                        <div class="d-flex flex-row">
+                            <div class="p-2 mr-auto ml-5"><a><a href="/<%=lang%>/admin/portfolio"><i class="fas fa-folder-open fa-5x"></i></a><p>Add a Portfolio</p></div>
+                            <div class="p-2 mr-auto ml-5"><a href="#"><i class="fas fa-barcode fa-5x"></i></a><p>Create barcodes</p></div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="p-2 mr-auto ml-5"><a href="/<%=lang%>/admin/catalog"><i class="fa fa-eye fa-5x"></i></a><p>View catalogs</p></div>
+                            <div class="p-2 mr-auto ml-5"><a href="#"><img width="100px" height="80px" src="/img/pos.png"/></a><p>Add a PoS</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dashboard-footer greybg">
+</div>
+<div class="dashboard-header whitebg">
+    <div class="col-md-9 item-container">
+        <div class="title_pane"><h2>Your account</h2></div>  
+    </div>
+</div>
+<div class="bottom-dashboard">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-9 item-container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-sm-2 item">
+                <h3><a href="#"><i class="far fa-credit-card fa-4x"></i></a></h3>
+                <h3>Payments</h3>
+            </div>
+            <div class="col-sm-2 item">
+                <h3><a href="#"><i class="fas fa-file-invoice-dollar fa-4x"></i></a></h3>
+                <h3>Invoices</h3>
+            </div>
+            <div class="col-sm-2 item">
+                <h3><a href="#"><i class="fa fa-users fa-4x" aria-hidden="true"></i></a></h3>
+                <h3>Customers</h3>
+            </div>
+            <div class="col-sm-2 item">
+                <h3><a href="#"><i class="fas fa-hand-holding-usd fa-4x"></i></a></h3>
+                <h3>Returns</h3>
+            </div>       
+        </div>                   
+        </div>
+    </div>
+</div>

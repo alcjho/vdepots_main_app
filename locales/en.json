@@ -1,1 +1,23 @@
-{}
+{
+	"Welcome": "Welcome",
+	"slogan": "slogan",
+	"register today": "register today",
+	"it's free": "it's free",
+	"your firstname": "your firstname",
+	"your company": "your company",
+	"your phone": "your phone",
+	"your lastname": "your lastname",
+	"your location": "your location",
+	"your email": "your email",
+	"your password": "your password",
+	"retype password": "retype password",
+	"I am a reseller": "I am a reseller",
+	"I am a buyer": "I am a buyer",
+	"I am a service provider": "I am a service provider",
+	"I am a service professional": "I am a service professional",
+	"Submit": "Submit",
+	"x-sells solution": "x-sells solution",
+	"Home": "Home",
+	"Signup": "Signup",
+	"Login": "Login"
+}

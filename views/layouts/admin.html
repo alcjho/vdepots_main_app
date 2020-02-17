@@ -1,0 +1,158 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title><%=__('x-sells solution')%></title>
+    
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">   
+    <script src="/js/jquery_min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+
+    <style>
+        body{
+               
+          margin-left:0;
+          margin-right:0;
+        }
+
+        .container-fluid{
+            width:100%;
+            padding:0;
+            padding-top:50px;
+        }
+
+        .viewport{
+            width:100%;
+        }
+
+        .jumbotron{
+            margin:0;
+        }
+
+        .page-footer {
+           position:relative;
+           bottom:0px;
+           width:100%;
+           background:#dee2e6;
+           padding-top:10px;
+        }
+             
+        .footer-copyright{
+            background-color:#101010;
+            width:100%;
+            height:50px;
+            
+        }
+
+        .fixed-header {
+          width:100%;
+          background-color:#008080;
+          height: 60px;
+          position:fixed;
+          padding-left:50px;
+          padding-right:50px;
+          z-index:9;
+          top:0;
+        }
+
+        .fixed-right-header {
+            background: transparent;
+            height:100%;
+            padding:15px;
+            color:#eeeeee;
+        }
+
+        .fixed-right-header a{
+          margin-left:10px;
+          margin-right:10px;
+          color:#eeeeee;
+        }
+
+        .fixed-right-header img{
+          margin-left:10px;
+          margin-right:10px;
+          color:#eeeeee;
+        }        
+
+        .fixed-left-header {
+          background: transparent;
+                /*float:left;*/       
+        }
+
+        .fixed-middle-header {
+          background: #FFF;
+                /*float:left;*/       
+        }
+
+        .greeting{
+            font-weight:bold;   
+            font-size: 1.2em;
+            margin-top:10px;
+            color:#d8b763;
+            width:auto;
+        }
+
+        .yellow-link a{
+            color:#d8b763;
+            font-size:1.2em;
+            font-weight:bold;
+        }
+
+        .yellow-link a:active{
+            color:#d8b763;
+        }
+
+        .orange-link a:hover{
+            color:#ddc17c;
+        }
+    </style>
+
+</head>
+<body>
+<div class="viewport">
+    <div class="fixed-header">
+        <div class="row">
+            <div class="fixed-left-header col-sm-8 text-left ">
+                <div class="greeting"> <%=__('Good morning')%> <%=locals.dispname%>!</div>
+            </div> 
+            <div class="fixed-right-header col-sm-4 text-right yellow-link">
+                <%if(locals.admin){%>
+                    <a href="/<%=lang%>/admin/"><%=__('Home')%></a>
+                    |
+                    <a href='/<%=lang%>/admin/portfolio'><%=__('Portfolio')%></a>
+                    |
+                    <a href='#'>Profile</a>
+                    |                
+                    <a href='/<%=lang%>/users/logout'><%=__('Logout')%></a>
+                <%}else{%>
+                    <a href='/<%=lang%>/'><%=__('Home')%></a>
+                    |
+                    <a href='/<%=lang%>/'><%=__('signup')%></a>
+                    |               
+                    <a href='/<%=lang%>/users/login'><%=__('Login')%></a>
+                <%}%>
+            </div>
+        </div>         
+    </div>
+
+    <div class="container-fluid">    
+        <%- body %>
+    </div>
+</div>
+<!-- Footer -->
+</body>
+
+<script>
+  var lastScrollTop = 0;
+  $(window).scroll(function(event){
+    var st = $(this).scrollTop();
+    if (st > lastScrollTop){
+        $('.fixed-header').css({'-webkit-box-shadow': '1px 6px 4px -4px #353D59', 'box-shadow': '1px 6px 4px -4px #353D59'})
+    } else {
+        $('.fixed-header').css({'-webkit-box-shadow': '', 'box-shadow': ''})
+    }
+    lastScrollTop = st;
+  });
+</script>
+</html>

@@ -1,0 +1,12 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link href="/css/prodlist.css" rel="stylesheet">
+
+<h2>{{LIST.title1}} <b>{{LIST.title2}}</b></h2>
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0"></div>
+<div class="row" id="ads">
+    {{#each products}}
+        {{> user/product/auto_thumb name=name mileage=mileage year=year price=price status=status thumb=thumb action="Details"}}
+    {{/each}}
+</div>

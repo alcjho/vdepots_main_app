@@ -1,0 +1,254 @@
+<style>
+    .container{
+        padding-top:20px;
+    }
+
+    .new-portfolio a {
+        color:#f0cc71;
+        text-decoration:none;
+    }
+
+    .new-portfolio a:hover{
+        color:#d8b763;
+        text-decoration:none;
+    }
+
+    .all-portfolios{
+        min-height: 150px;
+        margin-bottom:50px;
+    }
+
+    .all-portfolios i:hover{
+        font-size: 10.1em;
+        color:#f0c14a;
+    }
+
+    .all-portfolios i{
+        cursor:pointer;
+    }
+
+    .pfolio_model{  
+        display:none;
+    }
+
+    .item-counter{
+        position:absolute;
+        top: 35px;
+        left:25px;
+        color:#302f31;
+        font-size: 1em;
+    }
+
+    .formcol{
+        margin-top:30px;
+        border-radius:20px;
+        border: 1px solid #999;
+    }
+
+    .formcol input[type=radio]{
+        width:30px;
+    }
+
+    .formcol input[type=text]{
+        height:50px;
+        background-color:aquamarine;
+        font-size:1.3em;
+    }
+
+    .formcol select{
+        height:50px;
+        background-color:aquamarine;
+        font-size:1.3em;
+    }   
+
+    .formcol textarea{
+        height:122px;
+        background-color:aquamarine;
+        font-size:1.3em;
+    }
+
+    .formcol h3{
+        margin-top:-20px;
+        padding:10px;
+        color:#f0cc71;
+    } 
+
+    .new-portfolio input,select,textarea{
+        margin-bottom:20px;
+        width:100%
+    }
+
+    .thead-dark th{
+        color:#f0cc71!important;
+        background-color:#008080 !important;
+        font-size:1.2em;
+    }
+
+    .with-padding-5{
+        padding:5px;
+    }
+
+    .with-padding-10{
+        padding:10px;
+    }
+
+    .with-padding-20{
+        padding:20px;
+    } 
+
+    .with-padding-30{
+        padding:30px;
+    }
+
+    .with-margin-10{
+        margin:10px;
+    }
+
+   .with-margin-20{
+        margin:20px;
+    }
+
+   .with-margin-40{
+        margin:40px;
+    }
+
+    .with-margin-btm{
+        margin-bottom:40px;
+    }
+
+    .with-bg{
+        background: #008080;
+        background: -moz-linear-gradient(top, #008080 0%, #00CFCF 100%);
+        background: -webkit-linear-gradient(top, #008080 0%, #00CFCF 100%);
+        background: linear-gradient(to bottom, #008080 0%, #00CFCF 100%);
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="new-portfolio"> 
+                <form name="portfolio-form" id="portfolio-form" action="" method="post">
+                    <div class="row">
+                        <div class="col-md-12 itemlist">
+                            <h2 style="margin-left:18px;text-align:center;display:inline-block;margin-top:16px"><%=__('Available Portfolios')%></h2>
+                            <hr>                         
+                            <div class="all-portfolios">                
+                                <div class="row portfolios">
+                                    <% portfolio.forEach(function(p){%>                                                
+                                    <div class="col-sm-3" id="pfolio_<%=p.id%>">
+                                       <div class="cover-image">
+                                           <div class="item-counter">items (<%=(p.total_items == null)?0:p.total_items%> ) </div>
+                                            <a href="portfolio/pfid/<%=p.id%>"><i class="fas fa-folder-open fa-10x"></i></a>
+                                        </div>                                            
+                                        <div class="portfolio-name">
+                                            <h3><%=p.name%></h3>
+                                        </div>                                        
+                                    </div>
+                                    <%})%>
+                                </div>
+                            </div>
+                        </div>                                           
+                        <div class="col-md-12">
+                            <h2 style="margin-left:18px;text-align:center;display:inline-block;margin-top:16px"><%=__('Create new portfolio')%></h2>
+                            <a href="javascript:void(0)" onclick="addPortfolio(this)"><i style="float:right" class="fas fa-save fa-4x" ></i></a>
+                            <hr style="padding:0;margin:0">
+                            <div class="row">                       
+                                <fieldset class="col-md-6 with-padding-20">
+                                    <div class="formcol with-bg with-padding-20 with-margin-btm">
+                                        <h3><%=__('Portfolio data')%></h3>
+                                        <input class="form-control" type="text" name="pflname" placeholder="Portfolio title ex. Cars " tabindex="1">
+                                        <input class="form-control" type="text" name="capacity" placeholder="Capacity of your portfolio ex. 100" tabindex="2">
+                                        <select name="pfltype" class="form-control" tabindex="3">
+                                                <option value="yes"><%=__('Select a type for your portfolio')%></option>
+                                                <option value="product"><%=__('product')%></option>
+                                                <option value="service"><%=__('service')%></option>
+                                        </select>
+                                        <textarea rows="5" class="form-control" name="description"></textarea>
+                                    </div>
+
+                                <%=locals.error%>                    
+                                </fieldset>
+                                <fieldset class="col-md-6 with-padding-20">
+                                        <div class="formcol with-bg with-padding-20 with-margin-btm">
+                                            <h3><%=__('Membership data')%></h3>
+                                            <table class="table table-sm">
+                                                <% membership.forEach(function(plan){%>
+                                                <tr>
+                                                    <td><input type="radio" name="plan" value="<%=plan.id%>" class="form-control" onclick="autoCapacity('<%=plan.capacity%>')"></td>
+                                                    <td><label for="plans">Max <%=plan.capacity%> products + <%=plan.description%></label></td>
+                                                </tr>
+                                                <%})%>
+                                            </table>
+                                        </div>
+                                    <%=locals.error%>                    
+                                    </fieldset>
+
+
+                            </div>
+                            <hr style="margin:0;padding:0">
+                            <a href="javascript:void(0)" onclick="addPortfolio(this)"><i style="float:right" class="fas fa-save fa-4x"></i></a>                        
+                        </div>                      
+                    </div>                        
+                </form>                      
+            </div>
+            <div class="alert alert-danger" style="display:<%=error_visible%>"><%=locals.error_msg%></div>
+            <div class="alert alert-success" style="display:<%=success_visible%>"><%=locals.sucess_msg%></div>
+        </div>
+        
+    </div>
+ 
+</div>
+
+<script>
+    var source = axios.CancelToken.source();
+    axios.interceptors.request.use(function (config) {
+        config.cancelToken =  source.token;
+        return config;
+    }, function (error) {
+        return Promise.reject(error);
+    });
+
+    axios.interceptors.request.use((config) => {
+        var formArray = $('#portfolio-form').serializeArray();
+        var formdata = {};
+
+        for (var i = 0; i < formArray.length; i++){
+            formdata[formArray[i]['name']] = formArray[i]['value'];
+        }
+        
+
+        return config;
+    }, (error) => {
+            // Do something with request error
+            return Promise.reject(error);
+        });
+</script>
+
+
+<script>
+    async function addPortfolio(elm){
+        var formArray = $(elm).parents('form').serializeArray();
+        var formdata = {};
+
+        for (var i = 0; i < formArray.length; i++){
+            formdata[formArray[i]['name']] = formArray[i]['value'];
+        }
+        
+       try {
+            const response = await axios.post('portfolio/add', formdata);
+            console.log(response);
+            if(response.data.success){
+               window.location = window.location.href;
+            }else{
+                console.log('Oops')               
+            }
+        }catch (error) {
+            console.error(error);
+        }
+    }
+
+
+    function autoCapacity(capacity){
+        $('input[name=capacity]').val(capacity);
+    }
+</script>

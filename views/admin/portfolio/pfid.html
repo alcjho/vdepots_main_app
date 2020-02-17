@@ -1,0 +1,294 @@
+<style>
+        .container{
+            padding-top:20px;
+        }
+    
+        .cover-image a {
+            color:#f0cc71;
+            text-decoration:none;
+        }
+    
+        .cover-image a:hover{
+            color:#d8b763;
+            text-decoration:none;
+        }
+    
+        .all-portfolios{
+            min-height: 150px;
+            margin-bottom:50px;
+        }
+    
+        .all-portfolios i:hover{
+            font-size: 10.1em;
+            color:#f0c14a;
+        }
+    
+        .all-portfolios i{
+            cursor:pointer;
+        }
+    
+        .pfolio_model{  
+            display:none;
+        }
+    
+        .item-counter{
+            position:absolute;
+            top: 35px;
+            left:25px;
+            color:#302f31;
+            font-size: 1em;
+        }
+    
+        .formcol{
+            margin-top:30px;
+            border-radius:20px;
+            border: 1px solid #999;
+        }
+    
+        .formcol input[type=radio]{
+            width:30px;
+        }
+    
+        .formcol input[type=text]{
+            height:50px;
+            background-color:aquamarine;
+            font-size:1.3em;
+        }
+    
+        .formcol select{
+            height:50px;
+            background-color:aquamarine;
+            font-size:1.3em;
+        }   
+    
+        .formcol textarea{
+            height:122px;
+            background-color:aquamarine;
+            font-size:1.3em;
+        }
+    
+        .formcol h3{
+            margin-top:-20px;
+            padding:10px;
+            color:#f0cc71;
+        } 
+    
+        .new-portfolio input,select,textarea{
+            margin-bottom:20px;
+            width:100%
+        }
+    
+        .thead-dark th{
+            color:#f0cc71!important;
+            background-color:#008080 !important;
+            font-size:1.2em;
+        }
+    
+        .with-padding-5{
+            padding:5px;
+        }
+    
+        .with-padding-10{
+            padding:10px;
+        }
+    
+        .with-padding-20{
+            padding:20px;
+        } 
+    
+        .with-padding-30{
+            padding:30px;
+        }
+    
+        .with-margin-10{
+            margin:10px;
+        }
+    
+       .with-margin-20{
+            margin:20px;
+        }
+    
+       .with-margin-40{
+            margin:40px;
+        }
+    
+        .with-margin-btm{
+            margin-bottom:40px;
+        }
+    
+        .with-bg{
+            background: #008080;
+            background: -moz-linear-gradient(top, #008080 0%, #00CFCF 100%);
+            background: -webkit-linear-gradient(top, #008080 0%, #00CFCF 100%);
+            background: linear-gradient(to bottom, #008080 0%, #00CFCF 100%);
+        }
+        
+        .catlist{
+            margin-top:30px;
+        }
+
+        .catlist i{
+            color:#d8b763;
+            cursor:pointer;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-3">
+                    <div class="cover-image">
+                        <div class="item-counter">items (<%=(portfolio.total_items == null)?0:portfolio.total_items%> ) </div>
+                        <a href=""><i class="fas fa-folder-open fa-10x"></i></a>
+                    </div>                                            
+                    <div class="portfolio-name">
+                        <h3><%=portfolio.name%></h3>
+                    </div>                                        
+                </div>
+                <div class="col-md-6">
+                    <lu style="font-size:1.2em">
+                        <li><strong>Name:</strong>&nbsp;<%=portfolio.name%></li>
+                        <li><strong>capacity:</strong>&nbsp;<%=portfolio.Membership.capacity%> &nbsp;items</li>
+                        <li><strong>Membership plan:</strong>&nbsp;<%=portfolio.Membership.title%> </li>
+                        <li><strong>Portfolio type:</strong>&nbsp;<%=portfolio.type%></li>
+                        <li><strong>Description:</strong>&nbsp;<%=portfolio.Membership.description%></li>
+                    </lu>
+                </div>
+        </div>
+        <div class="row catlist">
+            <div class="col-md-12">
+                <div class="col-md-12 itemlist">
+                    <h2 style="margin-left:0;text-align:center;display:inline-block;margin-top:16px">Catalogs in this portfolio</h2>                            
+                    <div class="all-catalogs">
+                        <table class="table">
+                        <thead class="thead thead-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Capacity</th>
+                                <th>Trending</th>
+                                <th>Trendings/page</th>
+                                <th>Listing</th> 
+                                <th>Products/page</th>
+                                <th>Description</th>
+                                <th>&nbsp;</th>                    
+                            </tr> 
+                        </thead>
+                        <tbody>              
+                        <%catalogs.forEach(function(cat){%>
+                            <tr>
+                                <td contenteditable="true"><%=cat.catname%></td>
+                                <td contenteditable="true"><%=cat.capacity%></td>
+                                <td contenteditable="true"><%=cat.trending%></td>
+                                <td contenteditable="true"><%=cat.trending_per_page%></td>
+                                <td contenteditable="true"><%=cat.listing%></td>
+                                <td contenteditable="true"><%=cat.listing_per_page%></td>
+                                <td contenteditable="true"><%=cat.description%></td>                       
+                                <td>
+                                    <div class="actions">
+                                        <a href="javascript:void(0)" onclick="updateCatalog(this)"><i class="fas fa-pen-square"></i></a>
+                                        <a href="javascript:void(0)" onclick="removeCatalog(this)"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <%})%>
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>                       
+                                <td>
+                                    <div class="actions">
+                                        <a href="javascript:void(0)" onclick="updateCatalog('<%=req.params.id%>', this)"><i class="fas fa-pen-square fa-2x"></i></a> &nbsp;&nbsp;
+                                        <a href="javascript:void(0)" onclick="removeCatalog()"><i class="fas fa-trash-alt fa-2x"></i></a>
+                                    </div>
+                                </td>                            
+                            </tr>
+                            <tr>
+                                <td colspan="8" align="right">
+                                    <i onclick="addCatalog('<%=req.params.id%>', this)" class="fas fa-plus-square fa-3x"></i>
+                                </td>
+                            </tr>                            
+                        </tbody> 
+                        </table>
+                    </div>
+                </div>                                   
+            </div>
+        </div>    
+    </div>
+    
+    <script>
+        var source = axios.CancelToken.source();
+        axios.interceptors.request.use(function (config) {
+            config.cancelToken =  source.token;
+            return config;
+        }, function (error) {
+            return Promise.reject(error);
+        });
+    
+        axios.interceptors.request.use((config) => {
+            var formArray = $('#portfolio-form').serializeArray();
+            var formdata = {};
+    
+            for (var i = 0; i < formArray.length; i++){
+                formdata[formArray[i]['name']] = formArray[i]['value'];
+            }
+            
+    
+            return config;
+        }, (error) => {
+                // Do something with request error
+                return Promise.reject(error);
+            });
+    </script>
+    
+    
+    <script>
+        async function addPortfolio(elm){
+            var formArray = $(elm).parents('form').serializeArray();
+            var formdata = {};
+    
+            for (var i = 0; i < formArray.length; i++){
+                formdata[formArray[i]['name']] = formArray[i]['value'];
+            }
+            
+           try {
+                const response = await axios.post('portfolio/add', formdata);
+                console.log(response);
+                if(response.data.success){
+                   window.location = window.location.href;
+                }else{
+                    console.log('Oops')               
+                }
+            }catch (error) {
+                console.error(error);
+            }
+        }
+    
+    
+        function autoCapacity(capacity){
+            $('input[name=capacity]').val(capacity);
+        }
+    </script>
+
+
+<script>
+        async function addCatalog(pfid, this){
+           try {
+                const response = await axios.post('catalog/add', {pfid: pfid});
+                console.log(response);
+                if(response.data.success){
+                   window.location = window.location.href;
+                }else{
+                    console.log('Oops')               
+                }
+            }catch (error) {
+                console.error(error);
+            }
+        }
+    
+    
+        function autoCapacity(capacity){
+            $('input[name=capacity]').val(capacity);
+        }
+    </script>

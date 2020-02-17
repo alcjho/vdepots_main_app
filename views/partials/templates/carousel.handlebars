@@ -1,0 +1,53 @@
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/css/carousel.css">
+
+<div class="row">
+	<div class="col-md-12">
+		<h2>Trending <b>Products</b></h2>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+		<!-- Carousel indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>   
+		<!-- Wrapper for carousel items -->
+		<div class="carousel-inner">
+			<div class="item carousel-item active">
+				<div class="row">
+					{{#each trend1}}
+						{{> user/product/thumb prodname=name oldprice=oldprice price=price}}
+					{{/each}}
+				</div>			
+			</div>
+			<div class="item carousel-item">
+				<div class="row">
+					{{#each trend2}}
+						{{> user/product/thumb prodname=name oldprice=oldprice price=price}}
+					{{/each}}
+				</div>
+			</div>
+			<div class="item carousel-item">
+				<div class="row">
+					{{#each trend3}}
+						{{> user/product/thumb prodname=name oldprice=oldprice price=price}}
+					{{/each}}
+				</div>
+			</div>
+
+		</div>
+		<!-- Carousel controls -->
+		<a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+			<i class="fa fa-angle-left"></i>
+		</a>
+		<a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+			<i class="fa fa-angle-right"></i>
+		</a>
+	</div>
+	</div>
+</div>                             		                            
