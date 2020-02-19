@@ -1,9 +1,9 @@
 import Service from './Service.js';
 
-class UserService extends Service {
+class AccountService extends Service {
   constructor(model) {
     super(model);
   }
 };
 
-export default UserService;
+export default AccountService;

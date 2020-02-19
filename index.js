@@ -54,6 +54,11 @@ i18n.expressBind(app, {
 */
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+/**
+ * 
+ * configuration required for for ejs template engine
+ */
 app.use(ejsLayout);
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
@@ -73,4 +78,7 @@ app.use(function(req, res, next){
 import home from "./routes/home/index.js";
 home(app);
 
-app.listen(3000);app
+import user from "./routes/user/index.js";
+user(app);
+
+app.listen(3000);
