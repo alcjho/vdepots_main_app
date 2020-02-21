@@ -12,6 +12,10 @@ class Connection {
     mongoose.set("useUnifiedTopology", true);
     mongoose.connect(url);
   }
+
+  static getUserPortfolio(prtfID){
+     
+  }
 }
 
 export default new Connection();
