@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 class Service {
-  constructor(model) {
-    this.model = model;
+  constructor(account) {
+    this.model = account.model;
+    this.schema = account.schema;
     this.getAll = this.getAll.bind(this);
     this.insert = this.insert.bind(this);
     this.update = this.update.bind(this);
@@ -49,22 +50,10 @@ class Service {
   }
 
   async insert(data) {
-    try {
-      let item = await this.model.create(data);
-      if (item)
-        return {
-          error: false,
-          item
-        };
-    } catch (error) {
-      console.log("error", error);
-      return {
-        error: true,
-        statusCode: 500,
-        message: error.errmsg || "Not able to create item",
-        errors: error.errors
-      };
-    }
+    this.model(data).save(function (err) {
+      if (err) return handleError(err);
+      console.log('Document saved successfully!');
+    });
   }
 
   async update(id, data) {

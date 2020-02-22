@@ -74,11 +74,15 @@ app.use(function(req, res, next){
   next();
 })
 
+import db from './config/database.js';
 
 import home from "./routes/home/index.js";
 home(app);
 
 import user from "./routes/user/index.js";
 user(app);
+
+import admin from "./routes/admin/index.js";
+admin(app);
 
 app.listen(3000);

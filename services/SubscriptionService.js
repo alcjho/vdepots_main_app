@@ -1,9 +1,9 @@
 
 import Service from './Service.js';
-import Account from '../models/admin/account/Account.js';
+import subscription from '../models/admin/account/Subscription.js';
 import bcrypt from 'bcrypt';
 
-class AccountService extends Service {
+class SubscriptionService extends Service {
   constructor(account) {
     super(account);
   }
@@ -64,4 +64,4 @@ async verifyUser(data, callback){
 
 
 
-export default AccountService;
+export default SubscriptionService;

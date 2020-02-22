@@ -1,9 +1,23 @@
 import mongoose from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
+import bcrypt from 'bcrypt';
 
 class Account {
 
-  initSchema() {
+  initSchema(objName) {
+    
+    switch(objName){
+      case 'Account':
+        const schema = this.accountSchema();
+        mongoose.model(objName, schema);
+        const model = mongoose.model(objName);
+        return {schema, model};
+    }
+
+  }
+
+  accountSchema(){
+    const SALT_WORK_FACTOR = 10;
     const schema = new mongoose.Schema(
       {
         firstname:String,
@@ -20,7 +34,8 @@ class Account {
         nbr_try: Number,             
         username: {
           type: String,
-          required: true
+          required: true,
+          index: { unique: true }
         },
         password: {
           type: String,
@@ -49,16 +64,41 @@ class Account {
         timestamps: true 
       }
     );
+
+    //Before saving the user data into the database
+    schema.pre('save', function(next) 
+    { 
+      var user = this;
+    
+      // generate a salt
+      bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+          if (err) return next(err);
+      
+          // hash the password along with our new salt
+          bcrypt.hash(user.password, salt, function(err, hash) {
+              if (err) return next(err);
+      
+              // override the cleartext password with the hashed one
+              user.password = hash;
+              next();
+          });
+      });
+    });
+    
+    schema.methods.comparePassword = function(password, cb) {
+      bcrypt.compare(password, this.password, function(err, isMatch) {
+          if (err) return cb(err);
+          cb(null, isMatch);
+      });
+    }
     
     schema.path('active').options.enum;
     schema.plugin(uniqueValidator);
-    mongoose.model("Account", schema);
+
+    return schema;
   }
 
-  getInstance() {
-    this.initSchema();
-    return mongoose.model("Account");
-  }
+
   /**
    * 
    * @param {} data

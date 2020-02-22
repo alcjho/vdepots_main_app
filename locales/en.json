@@ -19,5 +19,17 @@
 	"x-sells solution": "x-sells solution",
 	"Home": "Home",
 	"Signup": "Signup",
-	"Login": "Login"
+	"Login": "Login",
+	"Forgot your password?": "Forgot your password?",
+	"Your username": "Your username",
+	"Your password": "Your password",
+	"Remember me": "Remember me",
+	"Don't have an account?": "Don't have an account?",
+	"login": "login",
+	"Must be 5 characters or more?": "Must be 5 characters or more?",
+	"Wrong email format": "Wrong email format",
+	"Wrong phone format": "Wrong phone format",
+	"Good morning": "Good morning",
+	"Portfolio": "Portfolio",
+	"Logout": "Logout"
 }

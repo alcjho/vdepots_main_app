@@ -1,10 +1,11 @@
 import Controller from  './Controller.js';
 import AccountService from  "./../services/AccountService.js";
-import Account from  "../models/account/Account.js";
+import Account from  "../models/admin/account/Account.js";
+import validationResult from 'express-validator';
 
-const accountService = new AccountService(
-    new Account().getInstance()
-);
+const acc = new Account().initSchema('Account');
+const accountService = new AccountService(acc);
+
 
 class AccountController extends Controller {
 
@@ -14,6 +15,23 @@ class AccountController extends Controller {
 
   index(req, res) {
        res.render('user/index', {users: '', lang: req.params.lg, lglink: '', lgview:''});
+    //    accountService.addUser({
+    //         firstname:"Jhonny",
+    //         lastname: "Alcius",
+    //         company_name: "Soumission renovation",
+    //         company_desc: "Juste un test, juste un test",
+    //         promoCode: "",
+    //         activeDate: "",
+    //         license_name: "123345",
+    //         license_id: '10999834',
+    //         current_balance: 20,
+    //         last_balance: 23, 
+    //         last_try: "",
+    //         nbr_try: 1,             
+    //         username: "ajhonny",
+    //         password: "Passwords01"
+    //         }
+    //     )
   }
   
   //main validation method for users form
@@ -39,7 +57,11 @@ class AccountController extends Controller {
 
 
   logout(req, res){
+
   //switch language;
+    var lglink = ""; 
+    var lg = "";
+  
   if(!req.params.lg){
         req.i18n.locale = 'en';
         lglink = 'fr';
@@ -56,7 +78,9 @@ class AccountController extends Controller {
 
 
   login(req, res){
-    //switch language;
+    //Set language for this page.
+    var lglink = '';
+    var lg = '';
     if(!req.params.lg){
         req.i18n.locale = 'en';
         lglink = 'fr';
@@ -67,78 +91,50 @@ class AccountController extends Controller {
         lg = req.params.lg;
     }
     
-    try{
-        const errors = validationResult(req);
+    if(req.method == "GET"){
 
-        if(req.method == "POST"){
-            if (!errors.isEmpty()) {
-                res.render('users/login', {errors: errors.array()});
-                return;
-            }
-            authorize(req, res, lg);
+        res.render('user/login',
+        {
+            homelink: req.i18n.__("Home"),
+            signuplink: req.i18n.__("Signup"),
+            loginlink: req.i18n.__("Login"),
+            lglink: lglink,
+            lgview:'user/login',
+            lang: lg,
+            forgot_password: req.i18n.__("Forgot your password?"),
+            username: req.i18n.__("Your username"),
+            password: req.i18n.__("Your password"),
+            submit: req.i18n.__("Submit"),
+            remember: req.i18n.__("Remember me"),
+            having_account: req.i18n.__("Don't have an account?"),
+            signup: req.i18n.__("Signup"),
+            loginTitle: req.i18n.__("login"),
+            password_length_error: req.i18n.__("Must be 5 characters or more?"),
+            wrong_email_error: req.i18n.__("Wrong email format"),
+            wrong_phone_error: req.i18n.__("Wrong phone format")
+        });
+    }else if(req.method == "POST"){
 
-        }else if(req.method == "GET"){
-                res.render('users/login',
-                {
-                    homelink: req.i18n.__("Home"),
-                    signuplink: req.i18n.__("Signup"),
-                    loginlink: req.i18n.__("Login"),
-                    lglink: lglink,
-                    lgview:'users/login',
-                    lang: lg,
-                    forgot_password: req.i18n.__("Forgot your password?"),
-                    username: req.i18n.__("Your username"),
-                    password: req.i18n.__("Your password"),
-                    submit: req.i18n.__("Submit"),
-                    remember: req.i18n.__("Remember me"),
-                    having_account: req.i18n.__("Don't have an account?"),
-                    signup: req.i18n.__("Signup"),
-                    loginTitle: req.i18n.__("login"),
-                    password_length_error: req.i18n.__("Must be 5 characters or more?"),
-                    wrong_email_error: req.i18n.__("Wrong email format"),
-                    wrong_phone_error: req.i18n.__("Wrong phone format")
-                }
-            );
-        }
-    }catch(err){
-        return err;
+       accountService.verifyUser(req.body, function(match){
+           
+            if(match){
+                req.session.username = match.username;
+                req.session.userid = match._id;
+                req.session.email = match.email;
+                req.session.firstname = match.firstname;
+                req.session.lastname = match.lastname;  
+                console.log(req.session);                 
+                res.redirect('/'+lg+'/admin/');
+            }else{
+                res.redirect('/'+lg+'/login');
+            }           
+       });
     }
-  };
 
-
-  authorize(req, res, lg){
-    // Model.User.findAll({
-    //     where: {
-    //         username: req.body.username
-    //     }
-    // })
-    // .then(data => {
-    //     return data.map(function(result) {
-    //         bcrypt.compare(req.body.password, result.password, function(err, resp) {
-    //             if(resp){
-    //                 req.session.username = result.username;
-    //                 req.session.userid = result.id;
-    //                 req.session.email = result.email;
-    //                 req.session.firstname = result.firstname;
-    //                 req.session.lastname = result.lastname;                   
-    //                 res.redirect('/'+lg+'/admin/');
-    //             }else{
-    //                 res.redirect('/'+lg+'/users/login');
-    //             }
-    //         });
-    //     });
-    // })
   }
 
 
 
-  user_exists(username){
-  return Model.User.findAll({
-            where: {
-            username: username
-        }
-    });
-  }
 
 
 

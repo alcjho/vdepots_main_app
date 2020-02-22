@@ -1,5 +1,6 @@
 import AccountController from '../../controllers/AccountController.js';
 
 export default (app) => {
-    app.get('/:lg/login/', AccountController.index);
+    app.post('/:lg/login/', AccountController.login);
+    app.get('/:lg/login/', AccountController.login);
 }
