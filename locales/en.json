@@ -1,7 +1,7 @@
 {
 	"Welcome": "Welcome",
 	"slogan": "slogan",
-	"register today": "register today",
+	"register today": "Register today",
 	"it's free": "it's free",
 	"your firstname": "your firstname",
 	"your company": "your company",
@@ -19,10 +19,8 @@
 	"x-sells solution": "x-sells solution",
 	"Home": "Home",
 	"Signup": "Signup",
-	"Login": "Login",
 	"Forgot your password?": "Forgot your password?",
 	"Your username": "Your username",
-	"Your password": "Your password",
 	"Remember me": "Remember me",
 	"Don't have an account?": "Don't have an account?",
 	"login": "login",
@@ -31,5 +29,7 @@
 	"Wrong phone format": "Wrong phone format",
 	"Good morning": "Good morning",
 	"Portfolio": "Portfolio",
-	"Logout": "Logout"
+	"Logout": "Logout",
+	"Login": "Login",
+	"Your password": "Your password"
 }
